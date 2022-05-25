@@ -1,5 +1,7 @@
+import json
 import os
 import random
+import uuid
 
 import discord
 from discord.ext import commands
@@ -7,7 +9,6 @@ from dislash import slash_commands, Option, OptionType, InteractionClient, Actio
 
 TOKEN = os.getenv('MIKUBOTMEGRO_TOKEN')
 client = commands.Bot(command_prefix='/')
-InteractionClient(client)
 slash = slash_commands.SlashClient(client)
 
 guild_ids = [651039531096735745, 782619921108303892]
@@ -44,7 +45,7 @@ megro_role_ids = {
 
 @client.event
 async def on_ready():
-    print('DONE LOGIN')
+    print('[SERVER] DONE LOGIN')
     await client.change_presence(activity=discord.Game('プロセカ'))
 
 
@@ -70,10 +71,11 @@ async def valorant(inters: SlashInteraction, random_type: int):
         map_name = random.choice(valorant_map_list)
         await inters.reply(map_name)
         await inters.channel.send(file=discord.File('/home/pi/HelloWorld/Development/MikuBotMegro/' + map_name + '.webp'))
+        print('[SERVER] Valorant random map generated')
     elif random_type == 2:
         await inters.reply(random.choice(valorant_weapon_list))
+        print('[SERVER] Valorant random weapon generated')
 
-slash_token = ''
 
 @slash.command(
     name = 'year_uec',
@@ -99,10 +101,6 @@ slash_token = ''
     guild_ids = [782619921108303892] #目黒会のみ
 )
 async def year_uec(inters: SlashInteraction, year: int, operation: int):
-    global slash_token
-    if inters.token == slash_token:
-        return
-    slash_token = inters.token
     if 16 <= year <= 22:
         role = inters.guild.get_role(megro_role_ids[year])
         if operation == 1:
@@ -115,6 +113,34 @@ async def year_uec(inters: SlashInteraction, year: int, operation: int):
             print('[SERVER] Remove ' + str(year) + '生 role from ' + inters.author.name)
     else:
         embed_text = discord.Embed(title='INPUT ERROR', description='入力は16以上22以下です', color=0xff0000)
+
+    await inters.reply(embed=embed_text)
+
+
+@slash.command(
+    name = 'paper',
+    description = 'VOC-A PROJECT SECRET RESEARCH PAPER',
+    options = [
+        Option(
+            'index',
+            description='INDEX',
+            required=True,
+            type=OptionType.INTEGER
+        )
+    ],
+    guild_ids = guild_ids
+)
+async def paper(inters: SlashInteraction, index: int):
+    if 1 <= index <= 1:
+        with open('/home/pi/HelloWorld/Development/MikuBotMegro/PAPER/PAPER_' + str(index) + '.json', 'r') as fi:
+            json_load = json.load(fi)
+            embed_text = discord.Embed.from_dict(json_load)
+        #embed_text = discord.Embed(title='VOC-A P.S.E.P. #' + str(index), description=f.read(), color=0x81ffb1)
+        embed_text.set_footer(text='DOCTOR ID: ' + str(uuid.uuid4())[-6:], icon_url="https://cdn.discordapp.com/embed/avatars/2.png")
+        print('[SERVER] P.S.E.P. #' + str(index) + ' displayed')
+    else:
+        embed_text = discord.Embed(title='VOC-A P.S.E.P. ---ERROR', description='INPUT INDEX IS NOT FOUND\n ERROR CODE: [0x2de837]', color=0xff0000)
+        print('[SERVER] P.S.E.P. Input index is not found ERROR')
 
     await inters.reply(embed=embed_text)
 
