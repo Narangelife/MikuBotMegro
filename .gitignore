@@ -160,4 +160,4 @@ cython_debug/
 .idea/
 
 # SECRET RESEARCH PAPER
-./PAPER_1.txt
+PAPER_1.txt
