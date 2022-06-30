@@ -1,7 +1,6 @@
 name: 機能追加
 about: 目黒会Botの新規機能の詳細案
 title: "[新規機能案]"
-labels: ""
 assignees: Narangelife
 
 body: 
@@ -12,7 +11,7 @@ body:
          以下のテンプレートに沿って記入をお願いします
          
 - type: textarea
-  id: "overview"
+  id: overview
   attributes:
     label: 機能概要
     description: 機能内容を簡潔に記入してください
@@ -21,7 +20,7 @@ body:
     validations:
       required: true
 - type: textarea
-  id: "detail"
+  id: detail
   attributes:
     label: 機能詳細
     description: 機能詳細を記入してください
