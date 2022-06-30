@@ -1,0 +1,41 @@
+name: 機能追加
+about: 目黒会Botの新規機能の詳細案
+title: "[新規機能案]"
+labels: ""
+assignees: Narangelife
+
+body: 
+- type: markdown
+  attributes:
+    value: |
+      ## 新規機能の案をありがとうございます！
+         以下のテンプレートに沿って記入をお願いします
+         
+- type: textarea
+  id: "overview"
+  attributes:
+    label: 機能概要
+    description: 機能内容を簡潔に記入してください
+    placeholder: |
+      投票機能の追加
+    validations:
+      required: true
+- type: textarea
+  id: "detail"
+  attributes:
+    label: 機能詳細
+    description: 機能詳細を記入してください
+    placeholder: |
+      ユーザーがスラッシュコマンドを実行した際に記入した内容を元にリアクションを自動付与し...
+    validations:
+      required: true
+- type: dropdown
+  id: download
+  attributes:
+    label: 実行環境
+    options:
+      - チャット自動抽出
+      - Prefix検出
+      - スラッシュコマンド検出
+    validations:
+      required: true
