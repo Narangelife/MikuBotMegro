@@ -15,8 +15,8 @@ body:
     description: 機能内容を簡潔に記入してください
     placeholder: |
       投票機能の追加
-    validations:
-      required: true
+  validations:
+    required: true
 - type: textarea
   id: detail
   attributes:
@@ -24,8 +24,8 @@ body:
     description: 機能詳細を記入してください
     placeholder: |
       ユーザーがスラッシュコマンドを実行した際に記入した内容を元にリアクションを自動付与し...
-    validations:
-      required: true
+  validations:
+    required: true
 - type: dropdown
   id: download
   attributes:
@@ -34,5 +34,5 @@ body:
       - チャット自動抽出
       - Prefix検出
       - スラッシュコマンド検出
-    validations:
-      required: true
+  validations:
+    required: true
