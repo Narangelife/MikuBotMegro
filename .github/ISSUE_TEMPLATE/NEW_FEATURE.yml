@@ -9,7 +9,6 @@ body:
     value: |
       ## 新規機能の案をありがとうございます！
          以下のテンプレートに沿って記入をお願いします
-         
 - type: textarea
   id: overview
   attributes:
