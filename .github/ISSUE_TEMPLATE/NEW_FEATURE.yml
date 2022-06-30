@@ -2,7 +2,6 @@ name: 機能追加
 description: 目黒会Botの新規機能の詳細案
 title: "[新規機能案]"
 assignees: Narangelife
-
 body: 
 - type: markdown
   attributes:
